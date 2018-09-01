@@ -5,14 +5,27 @@
   "version": "0.1",
 
   "description": "Translate a selected word in a page.  Powered by Yandex.Translate",
-  
+
   "permissions": [
     "menus",
-	"tabs"
+    "activeTab",
+    "tabs",
+    "<all_urls>"
   ],
-  
-  "background": {
-   "scripts": ["wordtranslate.js"]
-  }
 
+ "browser_action": {
+   "default_title": "wordtranslate",
+   "default_popup": "wordtranslate.html"
+ },
+
+ "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_scripts.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
