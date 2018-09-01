@@ -1,0 +1,18 @@
+{
+
+  "manifest_version": 2,
+  "name": "wordtranslate",
+  "version": "0.1",
+
+  "description": "Translate a selected word in a page.  Powered by Yandex.Translate",
+  
+  "permissions": [
+    "menus",
+	"tabs"
+  ],
+  
+  "background": {
+   "scripts": ["wordtranslate.js"]
+  }
+
+}
