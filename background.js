@@ -2,14 +2,19 @@ browser.menus.create(
 	{
 		id: "wordtranslate",
 		title: "wordtranslate",
-		contexts: ["selection"]
+		contexts: ["selection"],
+		icons: {
+			"48": "icons/icon48.png",
+	    "64": "icons/icon64.png",
+	    "640": "icons/icon.png"
+		}
 	}
 );
 
 browser.menus.create(
 	{
 		id: "result",
-		title: "[result here]",
+		title: "...",
 		contexts: ["selection"]
 	}
 );
@@ -18,7 +23,10 @@ browser.menus.create(
 	{
 		id: "Yandex",
 		title: "Powered by Yandex.Translate",
-		contexts: ["selection"]
+		contexts: ["selection"],
+		icons: {
+			"200": "icons/yandex_logo.png"
+		}
 	}
 );
 

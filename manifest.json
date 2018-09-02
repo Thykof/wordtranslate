@@ -6,6 +6,13 @@
 
   "description": "Translate a selected word in a page.  Powered by Yandex.Translate",
 
+  "icons": {
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "640": "icons/icon.png"
+
+    },
+
   "permissions": [
     "menus",
     "activeTab",
@@ -15,7 +22,8 @@
 
  "browser_action": {
    "default_title": "wordtranslate",
-   "default_popup": "wordtranslate.html"
+   "default_popup": "wordtranslate.html",
+   "default_icon": "icons/icon64.png"
  },
 
  "content_scripts": [
