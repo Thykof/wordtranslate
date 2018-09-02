@@ -1,3 +1,12 @@
+* {
+  font-family: sans-serif;
+}
+
 #result {
   color: red;
+}
+
+select {
+  border: none;
+  padding: 3px;
 }
