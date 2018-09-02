@@ -4,15 +4,7 @@ function clickCallback(){
 	getResult(selection);
 }
 
-document.body.onclick = clickCallback;
-
-function showYandex () {
-	var creating = browser.tabs.create(
-		{
-			url: "http://translate.yandex.com/"
-		}
-	)
-}
+window.addEventListener("click", clickCallback);
 
 function fetchSync (url) {
 	fetch(url)
@@ -29,7 +21,6 @@ function fetchSync (url) {
 }
 
 function handleResult(result) {
-	console.log("result: " + result);
 	var sending = browser.runtime.sendMessage({result: result});
   sending.then(handleResponse, handleError);
 }
@@ -43,13 +34,7 @@ function getResult(text) {
 	}
 }
 
-// window.addEventListener("click", clickCallback);
-// browser.browserAction.onClicked.addListener(clickCallback);
-// document.body.onClick = clickCallback;
-// window.onclick = clickCallback
-
 //////////////////////////////// send message to background (and receive response)
-
 function handleResponse(message) {
   console.log(`Message from the background script:  ${message.response}`);
 }
@@ -57,13 +42,6 @@ function handleResponse(message) {
 function handleError(error) {
   console.log(`Error: ${error}`);
 }
-
-function notifyBackgroundPage(e) {
-  var sending = browser.runtime.sendMessage({greeting: "Greeting from the content script"});
-  sending.then(handleResponse, handleError);
-}
-
-// window.addEventListener("click", notifyBackgroundPage);
 
 ///////////////////////////////////// listen message from wordtranslate.js
 function onReceive(request, sender, sendResponse) {
