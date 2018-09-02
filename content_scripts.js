@@ -1,3 +1,5 @@
+var outputLanguage = "fr";
+
 function clickCallback(){
 	var selection = window.getSelection().toString();
 	getResult(selection);
@@ -39,7 +41,8 @@ function handleResult(result) {
 function getResult(text) {
 	if(text != "") {
 		key = "key";
-		var lang_code = "fr";
+		console.log(outputLanguage);
+		var lang_code = outputLanguage;
 		var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key="+key+"&text="+text+"&lang="+lang_code;
 	  var data = fetchSync(url);
 		// fetchAsync(url)
@@ -58,7 +61,7 @@ function handleError(error) {
 
 ///////////////////////////////////// listen message from wordtranslate.js
 function onReceive(request, sender, sendResponse) {
-	console.log(`message from script to content_scripts: ${request.message}`);
-	alert(request.message);
+	// console.log(`message from script to content_scripts: ${request.message}`);
+	outputLanguage = request.message;
 }
 browser.runtime.onMessage.addListener(onReceive);

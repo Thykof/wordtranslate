@@ -42,8 +42,8 @@ browser.menus.onClicked.addListener((info, tab) => {
 
 /////////////////////////////// receive message from content_scripts (and send response)
 function handleMessage(request, sender, sendResponse) {
-  console.log("Message from the content script: " + request.result);
-  sendResponse({response: "Response from background script"});
+  // console.log("Message from the content script: " + request.result);
+  // sendResponse({response: "Response from background script"});
 	updateItem(request.result);
 }
 browser.runtime.onMessage.addListener(handleMessage);

@@ -24,44 +24,31 @@ function fetchSync (url) {
 
 function setLang(data) {
   var langs = data['langs'];
-  var x = document.getElementById("select-lang");
-  var o;
+  var select = document.getElementById("select-lang");
+  var option;
   for (var key in langs) {
     if (langs.hasOwnProperty(key)) {
-        o = document.createElement("option");
-        o.value = key;
-        o.text = langs[key];
-        if(key == 'fr') {
-          o.selected = "selected";
-        }
-        x.add(o);
+        option = document.createElement("option");
+        option.value = key;
+        option.text = langs[key];
+        option.onclick = langChanged;
+        select.add(option);
     }
   }
 }
 
+////////////////////////// Get language
+function langChanged() {
+  var select = document.getElementById("select-lang");
+  var newLang = select.options[select.selectedIndex].value;
+  sendToContentScript(newLang);
+}
+
 /////////////////////// send message to content_scripts
-function sendMessage(tabs) {
-  console.log("sendMessage");
-  console.log(tabs);
-  browser.tabs.sendMessage(tabs[0].id, {message: text}); // text is undefined
-}
-
-function ShowError(error) {
-  console.log(error);
-}
-
 function sendToContentScript(text) {
-  browser.tabs.query({active: true, currentWindow: true})
-    .then(sendMessage, ShowError);
-
-  var gettingCurrent = browser.tabs.getCurrent()
-  console.log(gettingCurrent);
-  gettingCurrent.then(sendMessage);
-
   var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-  console.log(gettingActiveTab);
   gettingActiveTab.then((tabs) => {
     console.log(tabs);
     browser.tabs.sendMessage(tabs[0].id, {message: text});
-  });
+  }, (error) => {console.log(error);});
 }
