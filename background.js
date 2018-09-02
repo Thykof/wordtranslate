@@ -1,3 +1,5 @@
+var url_to_yandex;
+
 browser.menus.create(
 	{
 		id: "wordtranslate",
@@ -30,20 +32,25 @@ browser.menus.create(
 	}
 );
 
-function updateItem (new_title) {
+function updateItem (result) {
 	browser.menus.update("result", {
-		title: new_title,
+		title: result,
     });
 }
 
-function showYandex () {
-	var creating = browser.tabs.create({url: "http://translate.yandex.com/"})
+function OpenTab (url) {
+	browser.tabs.create({url: url})
 }
 
 browser.menus.onClicked.addListener((info, tab) => {
+	switch (info.menuItemId) {
+    case "result":
+	  	OpenTab(url_to_yandex);
+      break;
+  }
   switch (info.menuItemId) {
     case "Yandex":
-	  	showYandex();
+			OpenTab("http://translate.yandex.com/");
       break;
   }
 });
@@ -53,5 +60,6 @@ function handleMessage(request, sender, sendResponse) {
   // console.log("Message from the content script: " + request.result);
   // sendResponse({response: "Response from background script"});
 	updateItem(request.result);
+	url_to_yandex = "https://translate.yandex.com/?text=" + request.text + "&lang=" + request.lang;
 }
 browser.runtime.onMessage.addListener(handleMessage);

@@ -1,4 +1,5 @@
 var outputLanguage = "fr";
+var text_to_translate;
 
 function clickCallback(){
 	var selection = window.getSelection().toString();
@@ -13,7 +14,7 @@ function fetchSync (url) {
 			return response.json();
 		})
 		.then(function(data) {
-			handleResult(data['text'][0]);
+			handleResult(data['text'][0], data['lang']);
 		})
 		.catch(function(error) {
 			console.log("Fetch error: " + url + " " + error);
@@ -27,8 +28,8 @@ function fetchSync (url) {
 //   return data;
 // }
 
-function handleResult(result) {
-	var sending = browser.runtime.sendMessage({result: result});
+function handleResult(result, lang) {
+	var sending = browser.runtime.sendMessage({result: result, lang:lang, text:text_to_translate});
   sending.then(handleResponse, handleError);
 }
 
@@ -40,6 +41,7 @@ function handleResult(result) {
 
 function getResult(text) {
 	if(text != "") {
+		text_to_translate = text;
 		key = "key";
 		var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key="+key+"&text="+text+"&lang="+outputLanguage;
 	  var data = fetchSync(url);
