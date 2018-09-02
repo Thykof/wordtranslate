@@ -41,9 +41,7 @@ function handleResult(result) {
 function getResult(text) {
 	if(text != "") {
 		key = "key";
-		console.log(outputLanguage);
-		var lang_code = outputLanguage;
-		var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key="+key+"&text="+text+"&lang="+lang_code;
+		var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key="+key+"&text="+text+"&lang="+outputLanguage;
 	  var data = fetchSync(url);
 		// fetchAsync(url)
     // 	.then(data => handleResultAsync(data))

@@ -48,7 +48,6 @@ function langChanged() {
 function sendToContentScript(text) {
   var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
   gettingActiveTab.then((tabs) => {
-    console.log(tabs);
     browser.tabs.sendMessage(tabs[0].id, {message: text});
   }, (error) => {console.log(error);});
 }
